@@ -22,9 +22,9 @@
 }
 
 .options {
-  background-color: #ed94f5; /* Green */
+  background-color: #f7f3ab; /* Green */
   border: none;
-  color: white;
+  color: rgb(8, 8, 8);
   padding: 14px 40px;
   text-align: center;
   text-decoration: none;
@@ -34,6 +34,7 @@
   position: sticky;
   padding: 0.5rem;
   margin: 1rem auto;
+  font-size: 35px;
 }
 
 .center {
@@ -220,13 +221,14 @@ body {
   text-align: center;
   text-decoration: none;
   outline: none;
-  color: #fff;
-  background-color: #4CAF50;
+  color: rgb(221, 244, 12);
+  background-color: #0a38ef;
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
-  width: 20%;
+  width: 15%;
   position: sticky;
+  font-size: 20px;
   /* margin-left: 10%; */
 
 }

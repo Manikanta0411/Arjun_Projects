@@ -27,6 +27,15 @@ const NavBar = () => {
             <br/>
             <li>
               <NavLink
+                to="/PublicPlaces"
+              >
+                <button className="button"><b>Public Places</b></button>
+              &ensp;
+              </NavLink>
+            </li>
+            <br/>
+            <li>
+              <NavLink
                 to="/Flowers"
               >
                 <button className="button"><b>Flowers</b></button>
@@ -72,6 +81,76 @@ const NavBar = () => {
                 }
               >
                <button className="button"><b>Animals</b></button> 
+              </NavLink>
+              &ensp;
+            </li>
+              <br/>
+              <li>
+              <NavLink
+                to="/Objects"
+                className={
+                  splitLocation.length <= 2
+                    ? "page-heading myactive"
+                    : "page-heading"
+                }
+              >
+               <button className="button"><b>Objects</b></button> 
+              </NavLink>
+              &ensp;
+            </li>
+              <br/>
+              <li>
+              <NavLink
+                to="/Shapes"
+                className={
+                  splitLocation.length <= 2
+                    ? "page-heading myactive"
+                    : "page-heading"
+                }
+              >
+               <button className="button"><b>Shapes</b></button> 
+              </NavLink>
+              &ensp;
+            </li>
+              <br/>
+              <li>
+              <NavLink
+                to="/Colors"
+                className={
+                  splitLocation.length <= 2
+                    ? "page-heading myactive"
+                    : "page-heading"
+                }
+              >
+               <button className="button"><b>Colors</b></button> 
+              </NavLink>
+              &ensp;
+            </li>
+              <br/>
+              <li>
+              <NavLink
+                to="/Feelings"
+                className={
+                  splitLocation.length <= 2
+                    ? "page-heading myactive"
+                    : "page-heading"
+                }
+              >
+               <button className="button"><b>Feelings</b></button> 
+              </NavLink>
+              &ensp;
+            </li>
+              <br/>
+              <li>
+              <NavLink
+                to="/Birds"
+                className={
+                  splitLocation.length <= 2
+                    ? "page-heading myactive"
+                    : "page-heading"
+                }
+              >
+               <button className="button"><b>Birds</b></button> 
               </NavLink>
               &ensp;
             </li>

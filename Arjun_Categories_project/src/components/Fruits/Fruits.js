@@ -3,36 +3,38 @@ import { Image, Button } from 'antd';
 import { CloseButton } from "react-bootstrap";
 import { Route, Link, useNavigate } from "react-router-dom";
 import Home from "../Home/Home";
-// import Link from "antd/lib/typography/Link";
-// import rightAnswer from "../../Sounds/goodJob.mp3";
-// import swish from "../../Sounds/swish.mp3";
 import {Howl, Howler} from "howler";
 
-const Fruits = () => {
+const Fruits = (props) => {
+// const srcFolder = require.context('/Users/mohanabondada/Documents/Images/Fruits', false,/\.png$/);
+// const srcFolder = require.context('/Users/mohanabondada/Documents/Images/Fruits', false);
+const fileNames = props.folder.keys().map(key=>key.slice(2));
+console.log(fileNames);
+console.log("length..."+fileNames.length);
+let newFileNames = fileNames.map(files=>files.split(".")[0])
+console.log("new names..."+newFileNames)
+let flowersNames = newFileNames;
 
-let fruitsAndVegetables = ["Apple", "Banana", "Grapes", "Mango", "Orange", "Papaya", "Watermelon", "Guava", "PineApple"];
-// let fruitsAndVegetables = ["Apple", "Banana", "Grapes", "Mango", "Orange", "Papaya", "Watermelon", "Guava", "PineApple", "Onion", "Tomato", "Potato", "Capsicum", "Beetroot", "Cauliflower"];
-let fruitsNames = ["Apple", "Banana", "Grapes", "Mango", "Orange", "Papaya", "Watermelon", "Guava", "PineApple"];
-let vegetablesNames = ["Onion", "Tomato", "Potato", "Capsicum", "Beetroot", "Cauliflower"]
-let numbers = [1,2];
-
-const [photo, setPhoto] = useState("Apple");
+const [photo, setPhoto] = useState(flowersNames[0]);
 const [randomIndex, setRandomIndex] = useState();
 const [fruitsIndex, setFruitsIndex] = useState(0);
 const [imageChange, setImageChange] = useState(false);
+const [showOptions, setShowOptions] = useState(false);
+const [showName, setShowName] = useState(false);
 const [option, setOption] = useState(1);
 const [buttonValue, setButtonValue] = useState();
 const [gameResult, setGameResult] = useState("Let's Play...");
 let navigate = useNavigate(); 
 
+// console.log("flower names..."+flowersNames.length)
+
 useEffect(()=>{
-    setRandomIndex(Math.floor(Math.random() * 9));
-    // hitSound.play();
+    setRandomIndex(Math.floor(Math.random() * flowersNames.length));
 }, [imageChange])
 
-const swish = new Howl({
-    src: ["/swish.mp3"]
-})
+// const swish = new Howl({
+//     src: ["/swish.mp3"]
+// })
 
 const rightAnswer = new Howl({
     src: ["/goodJob.mp3"]
@@ -55,7 +57,7 @@ useEffect(()=>{
     setOption(Math.floor(Math.random() * 2));
     // setFruitsIndex(i);
     console.log("fruit index"+fruitsIndex)
-    if(fruitsAndVegetables.length > fruitsIndex+1){
+    if(flowersNames.length > fruitsIndex+1){
         setFruitsIndex(fruitsIndex+1)
     }
     
@@ -69,9 +71,9 @@ useEffect(()=>{
 const fruitsButton = ()=>{
     // hitSound.play();
     setGameResult("Let's Play...");
-    swish.play();
+    // swish.play();
     setImageChange(imageChange == true ? false : true);
-    setPhoto(fruitsAndVegetables[fruitsIndex])
+    setPhoto(flowersNames[fruitsIndex])
     console.log(i);
 }
 
@@ -85,7 +87,7 @@ if(value == photo){
     setGameResult("You're Right...");
     setTimeout(()=>{
         fruitsButton();
-    },[5000])
+    },[1000])
 }else{
     // alert("Wrong Answer")
     wrongAnswer.play();
@@ -95,38 +97,142 @@ if(value == photo){
 }
 console.log("Button value..."+buttonValue);
 
+const handleShowOptions=()=>{
+  setShowName(false);
+  setShowOptions(showOptions ? false : true);
+}
+
+const handleShowName=()=>{
+  setShowOptions(false);
+  setShowName(showName ? false : true);
+}
+
   return (
-      <div>
-        {/* <Link
+    <div>
+      {/* <Link
                 to={"/Home"}
                 style={{ color: "white" }}
               >
                 {""}
               <button className="back-button"> <b>&lt;Back</b> </button>
               </Link> */}
-           <div>
-              <button onClick={() => navigate(`/Home`)} className="back-button">Back</button></div>
-    <div class="Container-1">
-      <div className="text">
-        <div><p><h1>Fruits</h1></p></div>
-        {gameResult == "You're Wrong, Try Again!" ? <div> <p type="text" style={{color : "red"}}><span><h2>{gameResult}</h2></span></p></div> : <div> <p type="text" style={{color : "green"}}><span><h2>{gameResult}</h2></span></p></div>}
-    <div className="centered">
-      {/* <img src={Apple} alt="Car Image"></img> */}
-      {/* <img src={require(`../../Images/${photo}.png`).default} alt="Car Image" height={100} width={100}></img> */}
-      {/* <Button onClick={fruitsButton()}>Fruits</Button> */}
-      <br/><br/>
-
-      <Image src={require(`../../Images/Fruits/${photo}.png`).default} preview={false} height={300} width={300} className="image"></Image>
-      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      <Button className="next-button" onClick={fruitsButton}><b>Next</b></Button>
-    </div>
-    </div>
-    </div>
-  {/* <br/> */}
-    <div className="Container-1">
-     {option == 1 ?  <button type="button" className="options" name="button1" onClick={(event) => onChangeHandler("button1", photo)}>{photo}</button> : <Button className="options" name="button1" onClick={(event) => onChangeHandler("button1", fruitsAndVegetables[randomIndex] == photo ? fruitsAndVegetables[randomIndex+1] : fruitsAndVegetables[randomIndex])}>{fruitsAndVegetables[randomIndex] == photo ? fruitsAndVegetables[randomIndex+1] : fruitsAndVegetables[randomIndex]}</Button> }&emsp;
-      {option == 1 ? <Button className="options" name="button1" onClick={(event) => onChangeHandler("button1", fruitsAndVegetables[randomIndex] == photo ? fruitsAndVegetables[randomIndex+1] : fruitsAndVegetables[randomIndex])}>{fruitsAndVegetables[randomIndex] == photo ? fruitsAndVegetables[randomIndex+1] : fruitsAndVegetables[randomIndex]}</Button> : <Button className="options" name="button1" onClick={(event) => onChangeHandler("button1", photo)}>{photo}</Button>}
+      <div>
+        <button onClick={() => navigate(`/Home`)} className="back-button">
+         Go Home
+        </button>
       </div>
+      <div class="Container-1">
+        <div className="text">
+          <div>
+            <p>
+              <h1>{props.type}</h1>
+            </p>
+          </div>
+          {gameResult == "You're Wrong, Try Again!" ? (
+            <div>
+              {" "}
+              <p type="text" style={{ color: "red" }}>
+                <span>
+                  <h2>{gameResult}</h2>
+                </span>
+              </p>
+            </div>
+          ) : (
+            <div>
+              {" "}
+              <p type="text" style={{ color: "green" }}>
+                <span>
+                  <h2>{gameResult}</h2>
+                </span>
+              </p>
+            </div>
+          )}
+          <div className="centered">
+            {/* <img src={Apple} alt="Car Image"></img> */}
+            {/* <img src={require(`../../Images/${photo}.png`).default} alt="Car Image" height={100} width={100}></img> */}
+            {/* <Button onClick={fruitsButton()}>Fruits</Button> */}
+            <br />
+            <br />
+            <Image
+              src={
+                require(`/Users/mohanabondada/Documents/Images/${props.type}/${photo}.png`)
+                  .default
+              }
+              preview={false}
+              height={400}
+              width={400}
+              className="image"
+            ></Image>
+           
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <Button className="next-button" onClick={fruitsButton}>
+              <b>Next</b>
+            </Button>
+          </div>
+        </div>
+      </div>
+      {/* <br/> */}
+      
+      {showOptions && <div className="Container-1">
+        {option == 1 ? (
+          <button
+            type="button"
+            className="options"
+            name="button1"
+            onClick={(event) => onChangeHandler("button1", photo)}
+          >
+            {photo}
+          </button>
+        ) : (
+          <Button
+            className="options"
+            name="button1"
+            onClick={(event) =>
+              onChangeHandler(
+                "button1",
+                flowersNames[randomIndex] == photo
+                  ? flowersNames[randomIndex + 1]
+                  : flowersNames[randomIndex]
+              )
+            }
+          >
+            {flowersNames[randomIndex] == photo
+              ? flowersNames[randomIndex + 1]
+              : flowersNames[randomIndex]}
+          </Button>
+        )}
+        &emsp;
+        {option == 1 ? (
+          <Button
+            className="options"
+            name="button1"
+            onClick={(event) =>
+              onChangeHandler(
+                "button1",
+                flowersNames[randomIndex] == photo
+                  ? flowersNames[randomIndex + 1]
+                  : flowersNames[randomIndex]
+              )
+            }
+          >
+            {flowersNames[randomIndex] == photo
+              ? flowersNames[randomIndex + 1]
+              : flowersNames[randomIndex]}
+          </Button>
+        ) : (
+          <Button
+            className="options"
+            name="button1"
+            onClick={(event) => onChangeHandler("button1", photo)}
+          >
+            {photo}
+          </Button>
+        )}
+      </div> }
+     { showName && <div className="Container-1"><Button className="options">{photo}</Button> </div>}
+      <Button onClick={handleShowOptions} style={{color: "White", background:"red"}}>{showOptions ? "Hide Options" : "Show Options"}</Button><br/><br/>
+      <Button onClick={handleShowName} style={{color: "White", background:"red"}}>{showName ? "Hide Name" : "Show Name"}</Button>
+
     </div>
   );
 };
