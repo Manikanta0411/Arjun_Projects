@@ -255,3 +255,19 @@ body {
   border: 5px solid #555;
   border-radius: 10px;
 }
+
+.flex-blackjack-row-3 {
+  display: flex;
+  border-top: 10px solid rgb(118, 118, 243);
+  padding: 10px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* table, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  border-radius: 10px;
+} */

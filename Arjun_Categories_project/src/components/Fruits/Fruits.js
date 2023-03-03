@@ -22,6 +22,8 @@ const [imageChange, setImageChange] = useState(false);
 const [showOptions, setShowOptions] = useState(false);
 const [showName, setShowName] = useState(false);
 const [option, setOption] = useState(1);
+const [winsCount, setWinsCount] = useState(0);
+const [lossesCount, setLossesCount] = useState(0);
 const [buttonValue, setButtonValue] = useState();
 const [gameResult, setGameResult] = useState("Let's Play...");
 let navigate = useNavigate(); 
@@ -85,6 +87,7 @@ if(value == photo){
     // alert("Right Answer")
     rightAnswer.play();
     setGameResult("You're Right...");
+    setWinsCount(winsCount+1);
     setTimeout(()=>{
         fruitsButton();
     },[1000])
@@ -92,6 +95,7 @@ if(value == photo){
     // alert("Wrong Answer")
     wrongAnswer.play();
     setGameResult("You're Wrong, Try Again!");
+    setLossesCount(lossesCount+1);
 }
 // alert("hi")
 }
@@ -169,6 +173,18 @@ const handleShowName=()=>{
               <b>Next</b>
             </Button>
           </div>
+            <div class="flex-blackjack-row-3">
+        <table style={{border: "1px solid black", justifyContent: "space-around"}}>
+          <tr style={{border: "1px solid black"}}>
+            <th style={{border: "1px solid black", width: "100px"}}>Wins</th>
+            <th style={{border: "1px solid black"}}>Losses</th>
+          </tr>
+          <tr style={{border: "1px solid black"}}>
+            <td style={{border: "1px solid black"}}><span id="wins">{winsCount}</span></td>
+            <td style={{border: "1px solid black", width: "100px"}}><span id="losses">{lossesCount}</span></td>
+          </tr>
+        </table>
+      </div>
         </div>
       </div>
       {/* <br/> */}
