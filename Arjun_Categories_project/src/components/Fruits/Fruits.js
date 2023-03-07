@@ -21,6 +21,7 @@ const [fruitsIndex, setFruitsIndex] = useState(0);
 const [imageChange, setImageChange] = useState(false);
 const [showOptions, setShowOptions] = useState(false);
 const [showName, setShowName] = useState(false);
+const [playQuiz, setPlayQuiz] = useState(false);
 const [option, setOption] = useState(1);
 const [winsCount, setWinsCount] = useState(0);
 const [lossesCount, setLossesCount] = useState(0);
@@ -90,7 +91,7 @@ if(value == photo){
     setWinsCount(winsCount+1);
     setTimeout(()=>{
         fruitsButton();
-    },[1000])
+    },[500])
 }else{
     // alert("Wrong Answer")
     wrongAnswer.play();
@@ -104,6 +105,10 @@ console.log("Button value..."+buttonValue);
 const handleShowOptions=()=>{
   setShowName(false);
   setShowOptions(showOptions ? false : true);
+}
+
+const handlePlayQuiz=()=>{
+  setPlayQuiz(playQuiz ? false : true);
 }
 
 const handleShowName=()=>{
@@ -173,7 +178,7 @@ const handleShowName=()=>{
               <b>Next</b>
             </Button>
           </div>
-            <div class="flex-blackjack-row-3">
+         {playQuiz &&  <div class="flex-blackjack-row-3">
         <table style={{border: "1px solid black", justifyContent: "space-around"}}>
           <tr style={{border: "1px solid black"}}>
             <th style={{border: "1px solid black", width: "100px"}}>Wins</th>
@@ -184,7 +189,7 @@ const handleShowName=()=>{
             <td style={{border: "1px solid black", width: "100px"}}><span id="losses">{lossesCount}</span></td>
           </tr>
         </table>
-      </div>
+      </div>}
         </div>
       </div>
       {/* <br/> */}
@@ -246,9 +251,9 @@ const handleShowName=()=>{
         )}
       </div> }
      { showName && <div className="Container-1"><Button className="options">{photo}</Button> </div>}
+     <Button onClick={handlePlayQuiz} style={{color: "White", background:"red"}}>{playQuiz ? "Hide quiz" : "Play Quiz"}</Button><br/><br/>
       <Button onClick={handleShowOptions} style={{color: "White", background:"red"}}>{showOptions ? "Hide Options" : "Show Options"}</Button><br/><br/>
       <Button onClick={handleShowName} style={{color: "White", background:"red"}}>{showName ? "Hide Name" : "Show Name"}</Button>
-
     </div>
   );
 };
