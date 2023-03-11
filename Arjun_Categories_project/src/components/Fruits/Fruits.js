@@ -21,8 +21,8 @@ const [fruitsIndex, setFruitsIndex] = useState(0);
 const [imageChange, setImageChange] = useState(false);
 const [showOptions, setShowOptions] = useState(false);
 const [showName, setShowName] = useState(false);
-const [playQuiz, setPlayQuiz] = useState(false);
 const [option, setOption] = useState(1);
+const [playQuiz, setPlayQuiz] = useState(false);
 const [winsCount, setWinsCount] = useState(0);
 const [lossesCount, setLossesCount] = useState(0);
 const [buttonValue, setButtonValue] = useState();
@@ -107,13 +107,13 @@ const handleShowOptions=()=>{
   setShowOptions(showOptions ? false : true);
 }
 
-const handlePlayQuiz=()=>{
-  setPlayQuiz(playQuiz ? false : true);
-}
-
 const handleShowName=()=>{
   setShowOptions(false);
   setShowName(showName ? false : true);
+}
+
+const handlePlayQuiz=()=>{
+  setPlayQuiz(playQuiz ? false : true);
 }
 
   return (
@@ -178,7 +178,7 @@ const handleShowName=()=>{
               <b>Next</b>
             </Button>
           </div>
-         {playQuiz &&  <div class="flex-blackjack-row-3">
+      {playQuiz && <div class="flex-blackjack-row-3">
         <table style={{border: "1px solid black", justifyContent: "space-around"}}>
           <tr style={{border: "1px solid black"}}>
             <th style={{border: "1px solid black", width: "100px"}}>Wins</th>
@@ -254,6 +254,7 @@ const handleShowName=()=>{
      <Button onClick={handlePlayQuiz} style={{color: "White", background:"red"}}>{playQuiz ? "Hide quiz" : "Play Quiz"}</Button><br/><br/>
       <Button onClick={handleShowOptions} style={{color: "White", background:"red"}}>{showOptions ? "Hide Options" : "Show Options"}</Button><br/><br/>
       <Button onClick={handleShowName} style={{color: "White", background:"red"}}>{showName ? "Hide Name" : "Show Name"}</Button>
+
     </div>
   );
 };

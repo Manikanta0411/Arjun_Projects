@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Fruits from "./components/Fruits/Fruits";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "./layouts/NavBar/NavBar";
+import Vegetables from "./components/Vegetables/Vegetables";
+import Vehicles from "./components/Vehicles/Vehicles";
+import Animals from "./components/Animals/Animals";
 import Home from "./components/Home/Home";
+import Flowers from "./components/Flowers/Flowers";
+import PublicPlaces from "./components/PublicPlaces/PublicPlaces";
 
 const App = () => {
 const fruitsSrcFolder = require.context('/Users/mohanabondada/Documents/Images/Fruits', false);
@@ -17,6 +23,15 @@ const shapesSrcFolder = require.context('/Users/mohanabondada/Documents/Images/S
 const birdsSrcFolder = require.context('/Users/mohanabondada/Documents/Images/Birds', false);
 const feelingsSrcFolder = require.context('/Users/mohanabondada/Documents/Images/Feelings', false);
 
+// localStorage.setItem('defaultPath', "/Home");
+
+const setDefaultPath = (path) => {
+  localStorage.setItem('defaultPath', path);
+};
+
+useEffect(()=>{
+  setDefaultPath("/Home");
+},[])
   return (
     <div>
        <Router>
